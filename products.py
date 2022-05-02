@@ -12,7 +12,8 @@ for p in products:
 	print(p[0], '的價格為', p[1])
 
 #加入write功能
-with open('products.csv', 'w') as f: #用逗點可讓content在不同的CSV格子裡
+with open('products.csv', 'w', encoding = 'utf-8') as f: #encoding用了utf-8才不會亂碼
+	f.write('商品,價格\n') #用逗號區隔!!
 	for p in products:
-		f.write(p[0] + ',' + p[1] + '\n')
+		f.write(p[0] + ',' + p[1] + '\n') #用逗點可讓content在不同的CSV格子裡 
 
