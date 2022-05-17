@@ -4,17 +4,13 @@ import os
 # 讀取檔案
 def read_file(filename):
 	products = []
-	if os.path.isfile(filename):
-		print('yeah! 找到檔案了')
-		with open(filename, 'r', encoding = 'utf-8') as f:
-			for line in f:
-				if '商品,價格' in line:
-					continue
-				name, price = line.strip().split(',')
-				products.append([name,price])
-		print(products)
-	else: 
-		print('找不到檔案....')
+	with open(filename, 'r', encoding = 'utf-8') as f:
+		for line in f:
+			if '商品,價格' in line:
+				continue
+			name, price = line.strip().split(',')
+			products.append([name,price])
+	print(products)
 	return products
 
 # 讓使用者輸入
@@ -40,7 +36,15 @@ def write_file(filename, products):
 		for p in products:
 			f.write(p[0] + ',' + p[1] + '\n') #用逗點可讓content在不同的CSV格子裡 
 
-products = read_file('products.csv')
-products = user_input(products)
-price_tag(products)
-write_file('products.csv', products)
+def main():			
+	filename = 'products.csv'
+	if os.path.isfile(filename):
+		print('yeah! 找到檔案了')
+	else: 
+		print('找不到檔案....')
+	products = read_file(filename)
+	products = user_input(products)
+	price_tag(products)
+	write_file(filename, products)
+
+main()
